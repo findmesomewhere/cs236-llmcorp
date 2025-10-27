@@ -50,7 +50,8 @@ Helpful Answer:
         result = chain({"question": question, "chat_history": chat_history})
         return result
     except Exception as exc:  # Broad catch to surface helpful message when deps are missing
-        return {"answer": f"Service unavailable: {type(exc).__name__}: {exc}"}
+        # Lightweight fallback so the app remains usable in environments without heavy ML deps
+        return {"answer": f"(Demo mode) The ML backend isn't available in this environment. Your question was: '{question}'."}
 
 
 # Index new file
